@@ -1,9 +1,12 @@
 package com.spring.security.config;
 
 import com.spring.security.config.handler.*;
+import com.spring.security.config.provider.CodeProvider;
 import com.spring.security.config.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,6 +26,10 @@ import javax.annotation.Resource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+
+
+    @Resource
+    private UserDetailsServiceImpl userDetailsService;
 
     //登录成功处理逻辑
     @Resource
@@ -59,11 +66,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Resource
     private CustomizeAbstractSecurityInterceptor securityInterceptor;
 
+
     @Bean
-    public UserDetailsService userDetailsService() {
-        //获取用户账号密码及权限信息
-        return new UserDetailsServiceImpl();
+    CodeProvider codeProvider() {
+        CodeProvider codeProvider = new CodeProvider();
+        codeProvider.setPasswordEncoder(passwordEncoder());
+        codeProvider.setUserDetailsService(userDetailsService);
+        return codeProvider;
     }
+
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -74,9 +85,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //配置认证方式
-        auth.userDetailsService(userDetailsService());
+        auth.userDetailsService(userDetailsService);
     }
-
+    @Override
+    @Bean
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return new ProviderManager(codeProvider());
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

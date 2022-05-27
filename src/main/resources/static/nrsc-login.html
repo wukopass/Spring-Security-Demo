@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>登录页面</h2>
-<form action="/authentication/form" method="POST">
+<form action="/login" method="POST">
     <table>
         <tr>
             <td>用户名:</td>
@@ -20,7 +20,7 @@
         <tr>
             <td>图形验证码:</td>
             <td>
-                <input type="text" name="imageCode">
+                <input type="text" name="code">
                 <!--指定图形验证码的宽度为200，该配置为请求级配置，优先级最高-->
                 <img src="/code/image?width=200">
             </td>

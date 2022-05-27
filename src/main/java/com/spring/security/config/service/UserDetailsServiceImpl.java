@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
  * @Description:
  * @Date Create in 2019/8/29 14:36
  */
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -56,7 +58,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 grantedAuthorities);
     }
 
-    public static void main(String[] args) {
-
-    }
 }
