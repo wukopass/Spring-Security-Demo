@@ -8,18 +8,20 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.*;
 import java.io.IOException;
 
 /**
  * @Author: Hutengfei
- * @Description: 权限拦截器
+ * @Description: 权限拦截器 牛逼的  2022/5/26
  * @Date Create in 2019/9/4 16:25
  */
 @Service
-public class CustomizeAbstractSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
+public class CustomizeAbstractSecurityInterceptor extends
+        AbstractSecurityInterceptor implements Filter {
 
-    @Autowired
+    @Resource
     private FilterInvocationSecurityMetadataSource securityMetadataSource;
 
     @Autowired
@@ -38,7 +40,8 @@ public class CustomizeAbstractSecurityInterceptor extends AbstractSecurityInterc
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
+                         FilterChain filterChain) throws IOException, ServletException {
         FilterInvocation fi = new FilterInvocation(servletRequest, servletResponse, filterChain);
         invoke(fi);
     }

@@ -19,6 +19,7 @@ import java.io.IOException;
  */
 @Component
 public class CustomizeSessionInformationExpiredStrategy implements SessionInformationExpiredStrategy {
+
     @Override
     public void onExpiredSessionDetected(SessionInformationExpiredEvent sessionInformationExpiredEvent) throws IOException, ServletException {
         JsonResult result = ResultTool.fail(ResultCode.USER_ACCOUNT_USE_BY_OTHERS);

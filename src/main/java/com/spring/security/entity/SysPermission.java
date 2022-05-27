@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @since 2019-08-29 21:13:29
  */
 public class SysPermission implements Serializable {
+
     private static final long serialVersionUID = -71969734644822184L;
     //主键id
     private Integer id;

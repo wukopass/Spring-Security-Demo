@@ -18,8 +18,14 @@ import java.util.Iterator;
  */
 @Component
 public class CustomizeAccessDecisionManager implements AccessDecisionManager {
+
     @Override
-    public void decide(Authentication authentication, Object o, Collection<ConfigAttribute> collection) throws AccessDeniedException, InsufficientAuthenticationException {
+    public void decide(Authentication authentication, Object o,
+                       Collection<ConfigAttribute> collection) throws
+            AccessDeniedException, InsufficientAuthenticationException {
+        /**
+         * 查询用户有没访问该资源的权限
+         */
         Iterator<ConfigAttribute> iterator = collection.iterator();
         while (iterator.hasNext()) {
             ConfigAttribute ca = iterator.next();

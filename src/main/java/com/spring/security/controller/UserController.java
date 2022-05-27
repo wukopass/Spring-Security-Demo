@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,16 +18,18 @@ import java.util.List;
  */
 @RestController
 public class UserController {
-    @Autowired
-    SysUserService sysUserService;
+
+    @Resource
+    private SysUserService sysUserService;
 
     @GetMapping("/getUser")
-    public JsonResult getUser() {
+    public JsonResult<List<SysUser>> getUser() {
         List<SysUser> users = sysUserService.queryAllByLimit(1, 100);
         return ResultTool.success(users);
     }
+
     @GetMapping("/test")
-    public JsonResult test() {
+    public JsonResult<String> test() {
         return ResultTool.success("hello world");
     }
 }

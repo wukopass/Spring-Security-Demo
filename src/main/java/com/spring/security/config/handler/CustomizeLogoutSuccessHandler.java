@@ -19,8 +19,10 @@ import java.io.IOException;
  */
 @Component
 public class CustomizeLogoutSuccessHandler implements LogoutSuccessHandler {
+
     @Override
-    public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+    public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                                Authentication authentication) throws IOException, ServletException {
         JsonResult result = ResultTool.success();
         httpServletResponse.setContentType("text/json;charset=utf-8");
         httpServletResponse.getWriter().write(JSON.toJSONString(result));
