@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.spring.security.common.entity.JsonResult;
 import com.spring.security.common.enums.ResultCode;
 import com.spring.security.common.utils.ResultTool;
+import com.spring.security.config.exception.CodeException;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -46,7 +47,9 @@ public class CustomizeAuthenticationFailureHandler implements AuthenticationFail
         } else if (e instanceof InternalAuthenticationServiceException) {
             //用户不存在
             result = ResultTool.fail(ResultCode.USER_ACCOUNT_NOT_EXIST);
-        }else{
+        } else if (e instanceof CodeException) {
+            result = ResultTool.fail(ResultCode.CODE_FAIL);
+        } else {
             //其他错误
             result = ResultTool.fail(ResultCode.COMMON_FAIL);
         }

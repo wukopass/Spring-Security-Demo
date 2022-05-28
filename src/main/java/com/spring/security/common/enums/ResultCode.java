@@ -33,6 +33,7 @@ public enum ResultCode {
     USER_ACCOUNT_NOT_EXIST(2007, "账号不存在"),
     USER_ACCOUNT_ALREADY_EXIST(2008, "账号已存在"),
     USER_ACCOUNT_USE_BY_OTHERS(2009, "账号下线"),
+    CODE_FAIL(2010, "验证码出错"),
 
     /* 业务错误 */
     NO_PERMISSION(3001, "没有权限");

@@ -1,5 +1,6 @@
 package com.spring.security.config.provider;
 
+import com.spring.security.config.exception.CodeException;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -28,7 +29,7 @@ public class CodeProvider extends DaoAuthenticationProvider {
         String code = request.getParameter("code");
         String vf = (String)request.getSession().getAttribute("vf");
         if (code == null || !code.equals(vf)) {
-            throw new AuthenticationServiceException("验证码错误");
+            throw new CodeException("验证码错误");
         }
         //校验密码
         super.additionalAuthenticationChecks(userDetails, authentication);
